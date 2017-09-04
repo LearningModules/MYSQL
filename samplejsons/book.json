@@ -1,0 +1,10 @@
+{
+	"name": "MySpringCourse1",
+	"author": "Frenchi",
+	"series_t": "series1",
+	"sequence_i": "test1",
+	"genre_s": "Psychology",
+	"inStock": true,
+	"price": 12.2,
+	"pages_i": 100
+}
