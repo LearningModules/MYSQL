@@ -32,7 +32,7 @@ bookrouter
         console.log("Name is "+request.body.name)
         Book.create(
             {
-                //id: request.params.id,
+                //id: request.params.id, This is auto generated
                 name: request.body.name,
                 author: request.body.author,
                 series_t: request.body.series_t,
@@ -42,10 +42,10 @@ bookrouter
                 price: request.body.price,
                 pages_i: request.body.pages_i,
             }
-        ).then(function(){
-            console.log('Successfully saved the Book '+JSON.stringify(request.body))
+        ).then(function(b){
+            console.log('Successfully saved the Book '+JSON.stringify(request.body)+'. Book ID ='+b.id)
             response.status(201)
-            response.json({status: "Created", book: request.body})
+            response.json({status: "Created", book: b})
             //response.send();
         })
     })
