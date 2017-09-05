@@ -1,8 +1,6 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser')
-//var models  = require('./models').book;
-var sequelize = require('./models/book').sequelize
 var Book = require('./models/book').Book
 
 var port = process.env.PORT || 3000;
@@ -16,8 +14,6 @@ var authorrouter = express.Router();
 
 app.use('/books',bookrouter)
 app.use('/author',authorrouter)
-
-sequelize.sync() // This will create the table if it doesn't exist in the database
 
 
 ///////////Book API implementation///////////

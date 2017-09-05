@@ -26,6 +26,5 @@ const sequelize = new Sequelize('nodejstutorials', 'dev3', 'ClientPass3@23', {
     pages_i: Sequelize.INTEGER
   }); 
 
-  //sequelize.sync();
-  module.exports.sequelize = sequelize
+  sequelize.sync(); // This will create the table if it doesn't exist in the database
   module.exports.Book = Book
