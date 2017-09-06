@@ -86,8 +86,8 @@ bookrouter
     })
     .delete('/:id',function(request,response){
         console.log("Received book id for deletion"+ request.params.id)
-        Book.destroy({where : {id : request.params.id}}).then(function(deletedone){
-            if(deletedone == 0)
+        Book.destroy({where : {id : request.params.id}}).then(function(isDeleted){
+            if(isDeleted == 0)
                 {
                     console.log('Item not found')
                     response.status(404)
