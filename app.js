@@ -18,10 +18,45 @@ app.use('/author',authorrouter)
 
 ///////////Book API implementation///////////
 bookrouter
+    .get('/',function(request,response){
+    //response.status(200);
+    //response.send("Got request")
+    console.log('Book ID requested = '+request.params.id)
+    Book.findAll()
+    .then(books => {
+        if(books == null)
+            {
+                response.status(501)
+                response.send('Not Found!')
+            }
+        else
+            {
+        console.log('Printing the book')
+        response.status(200)
+        response.json(books)
+        console.log('Returned => '+JSON.stringify(books))
+            }
+    })
+})
     .get('/:id',function(request,response){
-        response.status(200);
-        response.send("Got request")
+        //response.status(200);
+        //response.send("Got request")
         console.log('Book ID requested = '+request.params.id)
+        Book.findById(request.params.id)
+        .then(book => {
+            if(book == null)
+                {
+                    response.status(501)
+                    response.send('Not Found!')
+                }
+            else
+                {
+            console.log('Printing the book')
+            response.status(200)
+            response.json(book)
+            console.log('Returned => '+JSON.stringify(book))
+                }
+        })
     })
     .put('/',function(request,response){
         console.log("Received book data for addition"+ JSON.stringify(request.body))
@@ -50,12 +85,22 @@ bookrouter
         response.send("Received books data. Thanks")
     })
     .delete('/:id',function(request,response){
-        console.log("Received book data for deletion"+ JSON.stringify(request.body))
-        response.send("Will delete book ID :" + request.params.id)
+        console.log("Received book id for deletion"+ request.params.id)
+        Book.destroy({where : {id : request.params.id}}).then(function(deletedone){
+            if(deletedone == 0)
+                {
+                    console.log('Item not found')
+                    response.status(404)
+                    response.json(({status: "not found" , bookid : request.params.id}))
+                }
+            else
+                {
+                    console.log('Book deleted')
+                    response.status(200)
+                    response.json({status: "deleted" , item : request.params.id})
+                }           
+        })
     })
-/////////////////////////////////////////
-
-
 
 
     //App server start and listen
