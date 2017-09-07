@@ -4,6 +4,7 @@
   "description": "Backended by MySQL, this contains a sample learners API development for exposing books resource",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
